@@ -2,6 +2,11 @@
     cursor: pointer;
 }
 
+.damage {
+    font-size: 5em;
+    color: maroon;
+}
+
 .notes {
     height: 20rem !important;
     background-image: none;
@@ -30,4 +35,9 @@
     font-size: 7rem;
     font-weight: bold;
     margin: 25%;
+}
+
+.locked {
+    box-sizing: content-box;
+    border-bottom: 20px solid maroon;
 }

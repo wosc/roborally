@@ -48,7 +48,7 @@
 <script id="template-damage" type="x-template">
     <span>
     <i class="material-icons pointer" @click="decr">remove_circle_outline</i>
-    <span style="font-size: 5em">{{context.damage}}</span>
+    <span  class="damage">{{context.damage}}</span>
     <i class="material-icons pointer" @click="incr">add_circle_outline</i>
     </span>
 </script>
@@ -73,8 +73,8 @@
 <script id="template-turn" type="x-template">
     <div class="row">
         <draggable :list="context.turn" group="cards" filter=".turn-slot"
-                   @add="add" @remove="remove">
-        <div class="mcard" v-for="(card, i) in context.turn">
+                   @add="add" @remove="remove" :move="move">
+        <div :class="'mcard' + (locked >= 0 && i >= locked ? ' locked' : '')" v-for="(card, i) in context.turn">
             <span v-if="card === null" class="turn-slot">{{ i + 1 }}</span>
             <img v-else :src="'./cards/' + card + '.jpg'">
         </div>
