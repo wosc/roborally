@@ -22,3 +22,12 @@
     width: inherit;
     height: inherit;
 }
+
+
+.turn-slot {
+    float: left;
+    color: #dddddd;
+    font-size: 7rem;
+    font-weight: bold;
+    margin: 25%;
+}

@@ -21,6 +21,10 @@ const GameController = {
     draw: function() {
         var self = this;
         if (self.data.draw.length) {
+            if (self.data.turn.includes(null)) {
+                alert('Zuerst alle 5 Programm-Slots bestücken.');
+                return;
+            }
             self.data.draw = [];
         } else {
             const count = 9 - this.data.damage;
@@ -83,5 +87,31 @@ const CardPool = new Vue({
     template: '#template-cardpool',
     data: {
         'context': CONTROLLER.data,
+    }
+});
+
+
+const Turn = new Vue({
+    el: '#turn',
+    template: '#template-turn',
+    data: {
+        'context': CONTROLLER.data,
+    },
+    methods: {
+        add: function(event) {
+            let curpos = event.newIndex + 1;
+            if (curpos == this.context.turn.length) {
+                curpos -= 2;
+            }
+            const current = this.context.turn.splice(curpos, 1)[0];
+            if (current) {
+                this.context.draw.push(current);
+            }
+        },
+        remove: function(event) {
+            if (this.context.turn.length < 5) {
+                this.context.turn.splice(event.oldIndex, 0, null);
+            }
+        }
     }
 });

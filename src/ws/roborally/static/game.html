@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="css/style.css">
 
     <script src="js/vue-2.5.21.min.js"></script>
+    <script src="js/sortable-1.12.0.umd.js"></script>
+    <script src="js/vuedraggable-2.24.2.umd.min.js"></script>
 </head>
 <body>
 
@@ -31,18 +33,7 @@
     <div class="row mt-5">
         <h3>Programm</h3>
     </div>
-    <div class="row">
-        <div class="mcard">
-        </div>
-        <div class="mcard">
-        </div>
-        <div class="mcard">
-        </div>
-        <div class="mcard">
-        </div>
-        <div class="mcard">
-        </div>
-    </div>
+    <span id="turn"></span>
 </div>
 
 <div class="container">
@@ -71,9 +62,23 @@
 
 <script id="template-cardpool" type="x-template">
     <div class="row mt-5">
+        <draggable :list="context.draw" group="cards">
         <div class="mcard" v-for="card in context.draw">
             <img :src="'./cards/' + card + '.jpg'">
         </div>
+        </draggable>
+    </div>
+</script>
+
+<script id="template-turn" type="x-template">
+    <div class="row">
+        <draggable :list="context.turn" group="cards" filter=".turn-slot"
+                   @add="add" @remove="remove">
+        <div class="mcard" v-for="(card, i) in context.turn">
+            <span v-if="card === null" class="turn-slot">{{ i + 1 }}</span>
+            <img v-else :src="'./cards/' + card + '.jpg'">
+        </div>
+        </draggable>
     </div>
 </script>
 
