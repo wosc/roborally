@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>RoboRally</title>
+
+    <link rel="stylesheet" href="css/bootstrap-material-design-4.1.3.min.css">
+    <link rel="stylesheet" href="css/roboto.css">
+    <link rel="stylesheet" href="css/material-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/vue-2.5.21.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+         <div class="col">
+             <span id="damage"></span>
+             <span id="drawbutton"></span>
+         </div>
+         <div class="col">
+         </div>
+    </div>
+</div>
+
+<div class="container">
+    <span id="cardpool"></span>
+    <div class="row mt-5">
+        <h3>Programm</h3>
+    </div>
+    <div class="row">
+        <div class="mcard">
+        </div>
+        <div class="mcard">
+        </div>
+        <div class="mcard">
+        </div>
+        <div class="mcard">
+        </div>
+        <div class="mcard">
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col">
+            <h3>Notizen</h3>
+            <textarea class="form-control notes"></textarea>
+        </div>
+    </div>
+</div>
+
+<script id="template-damage" type="x-template">
+    <span>
+    <i class="material-icons pointer" @click="decr">remove_circle_outline</i>
+    <span style="font-size: 5em">{{context.damage}}</span>
+    <i class="material-icons pointer" @click="incr">add_circle_outline</i>
+    </span>
+</script>
+
+<script id="template-drawbutton" type="x-template">
+   <span class="ml-5">
+   <button id="draw" class="btn btn-raised btn-secondary" @click="draw">{{title}}</button>
+   <div id="seed" class="invisible">{{context.seed}}</div>
+   </span>
+</script>
+
+<script id="template-cardpool" type="x-template">
+    <div class="row mt-5">
+        <div class="mcard" v-for="card in context.draw">
+            <img :src="'./cards/' + card + '.jpg'">
+        </div>
+    </div>
+</script>
+
+
+<script src="js/game.js"></script>
+
+</body>
+</html>

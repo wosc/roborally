@@ -56,10 +56,11 @@ class GameList(tornado.web.RequestHandler):
 
     async def post(self):
         game = Game()
-        self.redirect('../game?seed=%s' % game.seed)
+        self.redirect('../../game?seed=%s' % game.seed)
 
 
 class DrawCard(tornado.web.RequestHandler):
 
     async def post(self, seed):
-        self.write(list(Game.games[seed].draw(self.get_argument('count'))))
+        count = int(self.get_argument('count'))
+        self.write({'cards': list(Game.games[seed].draw(count))})
